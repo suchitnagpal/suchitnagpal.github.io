@@ -1,88 +1,58 @@
-import { profile, stats, skills } from '@/lib/data'
+import { profile } from '@/lib/data'
 
 export default function Hero() {
-  const stackPreview = skills.find(s => s.category === 'AI & ML')?.items.slice(0, 5) ?? []
-
   return (
-    <section className="pt-28 pb-16 px-6 max-w-5xl mx-auto">
-      <div className="grid grid-cols-3 gap-4">
+    <section className="relative min-h-screen bg-black flex flex-col items-center justify-center text-center px-8 overflow-hidden">
+      {/* Subtle radial gradient */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(99,102,241,0.12) 0%, transparent 70%)',
+        }}
+      />
 
-        {/* Name card — spans 2 cols */}
-        <div className="col-span-2 bg-[#111] text-white rounded-2xl p-8 flex flex-col justify-between min-h-[280px]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#6366f1] mb-4">
-              AI Engineer · Forward Deployed Engineer
-            </p>
-            <h1 className="text-4xl font-black tracking-tighter leading-none mb-3">
-              {profile.name}
-            </h1>
-            <p className="text-[#aaa] text-sm leading-relaxed max-w-sm">
-              {profile.tagline}
-            </p>
-          </div>
-          <div className="flex gap-3 mt-6">
-            <a
-              href="#projects"
-              className="text-sm font-semibold bg-[#6366f1] hover:bg-[#4f46e5] text-white px-5 py-2.5 rounded-full transition-colors"
-            >
-              View Work ↗
-            </a>
-            <a
-              href="#contact"
-              className="text-sm font-medium border border-white/20 text-white hover:border-white/40 px-5 py-2.5 rounded-full transition-colors"
-            >
-              Contact
-            </a>
-          </div>
-        </div>
+      <div className="relative z-10 max-w-5xl mx-auto">
+        <p
+          className="text-sm font-semibold uppercase tracking-[0.25em] mb-6"
+          style={{ color: '#6366f1' }}
+        >
+          {profile.headline}
+        </p>
 
-        {/* Status card */}
-        <div className="bg-[#fafafa] border border-[#e5e5e5] rounded-2xl p-6 flex flex-col justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-widest text-[#999] font-semibold mb-3">Status</p>
-            <p className="text-sm font-semibold text-[#111] mb-1">{profile.location}</p>
-            <p className="text-xs text-[#666]">{profile.sponsorship}</p>
-          </div>
-          <div className="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full w-fit">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            {profile.status}
-          </div>
-        </div>
+        <h1
+          className="font-black text-white leading-none tracking-tight mb-6"
+          style={{ fontSize: 'clamp(60px, 10vw, 100px)', letterSpacing: '-0.03em' }}
+        >
+          {profile.name}
+        </h1>
 
-        {/* Stat cards */}
-        {stats.map((stat, i) => (
-          <div
-            key={i}
-            className={`rounded-2xl p-6 flex flex-col justify-between ${
-              i === 0
-                ? 'bg-[#6366f1] text-white'
-                : 'bg-white border border-[#e5e5e5]'
-            }`}
+        <p
+          className="text-lg md:text-xl font-medium mb-10 max-w-2xl mx-auto"
+          style={{ color: 'rgba(255,255,255,0.55)', lineHeight: 1.6 }}
+        >
+          {profile.tagline}
+        </p>
+
+        <div className="flex gap-4 justify-center flex-wrap">
+          <a
+            href="#projects"
+            className="text-sm font-semibold text-white bg-[#0071e3] hover:bg-[#0077ed] px-7 py-3 rounded-full transition-colors"
           >
-            <p className={`text-3xl font-black tracking-tighter ${i === 0 ? 'text-white' : 'text-[#6366f1]'}`}>
-              {stat.value}
-            </p>
-            <p className={`text-xs mt-2 leading-snug ${i === 0 ? 'text-indigo-200' : 'text-[#666]'}`}>
-              {stat.label}
-            </p>
-          </div>
-        ))}
-
-        {/* Stack preview card */}
-        <div className="bg-white border border-[#e5e5e5] rounded-2xl p-6">
-          <p className="text-xs uppercase tracking-widest text-[#999] font-semibold mb-3">Core Stack</p>
-          <div className="flex flex-wrap gap-2">
-            {stackPreview.map((item) => (
-              <span
-                key={item}
-                className="bg-[#f5f5f5] border border-[#e5e5e5] text-[#444] text-xs px-2.5 py-1 rounded-md"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
+            View My Work
+          </a>
+          <a
+            href="#contact"
+            className="text-sm font-medium px-7 py-3 rounded-full border border-white/20 hover:border-white/50 text-white/80 hover:text-white transition-all"
+          >
+            Get in Touch
+          </a>
         </div>
+      </div>
 
+      {/* Scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+        <span className="text-[10px] text-white tracking-[0.2em] uppercase">Scroll</span>
+        <div className="w-px h-8 bg-white/40" />
       </div>
     </section>
   )
